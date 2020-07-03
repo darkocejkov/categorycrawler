@@ -1,0 +1,919 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript">
+    var esol_ico_width = 0;
+
+    try {
+        esol_ico_width = window.innerWidth
+            || document.documentElement.clientWidth
+            || document.body.clientWidth;
+    } catch (err) { }
+
+    var iCreateObject =
+    {
+        isSiteInICreateMode: "False".toLowerCase() == "true",
+        lang: "en",
+        isIe8: false,
+        corpHome: "https://www.regionofwaterloo.ca/",
+        corpRoot: "/",
+        gaTrackingCode: '',
+        isSiteInLocalDevelopment: 'False'.toLowerCase() == "true",
+        calendarUrl: 'https://calendar.regionofwaterloo.ca/',
+        isSiteInPreviewMode: 'False'.toLowerCase() == "true",
+        newsFeeds: {},
+        isMobile: esol_ico_width <= 767,
+        iCreateTheme: ''
+    }
+
+    var myStringArray = "".split(',');
+    for(var i = 0; i < myStringArray.length; i++)
+    {
+        var mySubstring = myStringArray[i].split('|');
+        iCreateObject.newsFeeds[mySubstring[0]] = mySubstring[1];
+    }
+
+    try {
+        if (document.location.href.toLowerCase().indexOf('https://') == 0) {
+            iCreateObject.corpHome = 'https://' + iCreateObject.corpHome.substring(8);
+        }
+    } catch (err) { }
+
+    if (iCreateObject.isSiteInLocalDevelopment)
+        console.log(iCreateObject);
+
+</script>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes" />
+<!--This is only needed if you are using the Google translate widget-->
+<meta name="google-translate-customization" content="64f17b6d9cb6233b-e59f9de7b0b09f30-g4ca0816f9369ddc5-e"/>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<link href="/Common/styles/styles.css?ver=v5" rel="stylesheet" type="text/css" media="screen" />
+<link href="/Common/styles/icreate.css?ver=v2" rel="stylesheet" type="text/css" media="screen" />
+<link href="/Common/styles/print.css" rel="stylesheet" type="text/css" media="print" />
+<link href="https://js.esolutionsgroup.ca/js/libs/media-element/2.13.2/mediaelementplayer.min.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="https://customer.cludo.com/css/overlay/cludo-search-default.min.css" type="text/css" rel="stylesheet" />
+
+<!--[if lt IE 9]>
+    <script src="http://js.esolutionsgroup.ca/js/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src="https://js.esolutionsgroup.ca/js/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<link href="https://js.esolutionsgroup.ca/js/libs/jquery-ui/1.10.4/resources/themes/base/jquery-ui.min.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="https://js.esolutionsgroup.ca/js/libs/jquery-ui/1.11.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://js.esolutionsgroup.ca/js/libs/jquery_cookie/1.4.0/jquery.cookie.min.js"></script>
+<script type="text/javascript" src="https://js.esolutionsgroup.ca/js/libs/icreate-date/1.0.0/icrt-toDateTimeString.min.js"></script>
+<script type="text/javascript" src='/Common/scripts/general.js'></script>
+<script type="text/javascript" src='/Modules/email/scripts/email.js'></script>
+<link href="https://js.esolutionsgroup.ca/js/libs/jquery_contextmenu/skins/1.0.0/contextMenu.min.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="https://js.esolutionsgroup.ca/js/libs/jquery_contextmenu/1.0.0/jquery.contextMenu.min.js"></script>
+<script type="text/javascript">
+    function PrintScreen() {
+        if (iCreateObject.isSiteInICreateMode) {
+            showNAMessage();
+        } else {
+            window.print();
+        }
+    }
+</script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#096ab4">
+<meta name="theme-color" content="#096ab4">
+
+
+<link href="/Common/styles/int.css?v=2" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="https://js.esolutionsgroup.ca/js/libs/media-element/2.13.2/mediaelement-and-player.min.js"></script>
+
+
+<script type="text/javascript" src="https://js.esolutionsgroup.ca/js/libs/ios_slider/structure/1.3.43/jquery.iosslider.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // Drop-down lists
+        if (!iCreateObject.isSiteInICreateMode) {
+            $('video,audio').mediaelementplayer({
+                // if the <video width> is not specified, this is the default
+                defaultVideoWidth: 480,
+                // if the <video height> is not specified, this is the default
+                defaultVideoHeight: 270,
+                // if set, overrides <video width>
+                videoWidth: -1,
+                // if set, overrides <video height>
+                videoHeight: -1,
+                // width of audio player
+                audioWidth: 400,
+                // height of audio player
+                audioHeight: 30,
+                // initial volume when the player starts
+                startVolume: 0.8,
+                // useful for <audio> player loops
+                loop: false,
+                // enables Flash and Silverlight to resize to content size
+                enableAutosize: true,
+                // the order of controls you want on the control bar (and other plugins below)
+                features: ['playpause', 'progress', 'current', 'duration', 'tracks', 'volume', 'fullscreen'],
+                // Hide controls when playing and mouse is not over the video
+                alwaysShowControls: false,
+                // force iPad's native controls
+                iPadUseNativeControls: false,
+                // force iPhone's native controls
+                iPhoneUseNativeControls: false,
+                // force Android's native controls
+                AndroidUseNativeControls: false,
+                // forces the hour marker (##:00:00)
+                alwaysShowHours: false,
+                // show framecount in timecode (##:00:00:00)
+                showTimecodeFrameCount: false,
+                // used when showTimecodeFrameCount is set to true
+                framesPerSecond: 25,
+                // turns keyboard support on and off for this instance
+                enableKeyboard: true,
+                // when this player starts, it will pause other players
+                pauseOtherPlayers: true,
+                // array of keyboard commands
+                keyActions: []
+            });
+        }
+		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+		    $("#Share a.ShareLink").click(function (event) {
+		        if (iCreateObject.isSiteInICreateMode) {
+		            showNAMessage();
+		        } else {
+		            event.preventDefault();
+		            $("#Share").trigger("mouseenter");
+		        }
+		    });
+		}
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(window).load(function() {
+        if (!iCreateObject.isSiteInICreateMode || iCreateObject.isSiteInPreviewMode) {
+            $('#printAreaContent').find('table').each(function () {
+                if ($(this).width() > $('#main').width()) {
+                    $(this).wrap('<div class="tableContainer" />').addClass('wideTable');
+                }
+                var wideTableContainer = $(this).parent('.tableContainer');
+                $('<div class="tableContainerHead">Scroll right to view complete table</div>"').insertBefore(wideTableContainer);
+
+            });
+
+            $(".AccordionTrigger").on("click", function () {
+                $('#printAreaContent .AccordionContent table').each(function () {
+                    var width = $(this).parent(".AccordionContent").width();
+                    if (width > 0 && $(this).width() > width && !$(this).hasClass("wideTable")) {
+                        $(this).wrap('<div class="tableContainer" />');
+                        var wideTable = $(this).addClass('wideTable');
+                    }
+                    var wideTableContainer = $(wideTable).parent();
+                    $('<div class="tableContainerHead">Scroll right to view complete table</div>"').insertBefore(wideTableContainer);
+
+                });
+            });
+        }
+    });
+</script>
+
+
+        <script src='/Modules/Contact/scripts/contactsV2.js' type="text/javascript"></script>
+    
+<script type="text/javascript" src='/Common/scripts/icrtDoubleCtrlShortcut.js'></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (location.href.indexOf('/edit_') > -1) {
+                icrtDoubleCtrlShortcut(location.href.replace('/edit_', '/'));
+            } else {
+                icrtDoubleCtrlShortcut('https://icreate7.esolutionsgroup.ca/icreate/modules/pageeditor3/page.srv?pageUrl=' + encodeURIComponent(location.href.trim().split("#",1)));
+            }
+        });
+
+</script>
+
+<title>
+	
+     
+        COVID-19 INFORMATION CENTRE
+     - Region of Waterloo
+</title>
+        <meta name="description" content="Non-health related Novel Coronavirus (COVID-19) information. Including links to Regional closures and service changes, community supports and newsroom. " />
+
+<meta property="dcterms.issued" content="2020-06-09T12:46:10-0400" />
+<meta property="og:title" content="COVID-19 INFORMATION CENTRE" />
+<meta property="og:url" content="https://www.regionofwaterloo.ca/en/living-here/covid-19-information-centre.aspx" />
+<meta property="og:description" content="Non-health related Novel Coronavirus (COVID-19) information. Including links to Regional closures and service changes, community supports and newsroom. " /><script type="text/javascript" src="/Modules/News/scripts/jquery.EmergencyAlertBanners.js"></script><link rel="stylesheet" type="text/css" media="screen" href="/Modules/News/styles/EmergencyAlertBanners.css"></link><script type="text/javascript" src="https://js.esolutionsgroup.ca/js/libs/feedback-form/structure/2.6.0/feedbackStructure.js?v=1"></script><script type="text/javascript">$(function(){$("#feedbackLink").feedbackForm({
+useDefaultIfNoIdIsSet: "True".toLowerCase() == "true",
+baseUrl: "https://icreate7.esolutionsgroup.ca/feedback/api/1.0/",
+getUrl: "client/11111028_RegionofWaterloo/default-form/en",
+jsServerUrl: "https://js.esolutionsgroup.ca/js/libs/feedback-form/",
+previewMode: false,
+showButton: true,
+pageTitle: document.title.replace(" - Region of Waterloo", "").trim(),
+buttonText: "",
+feedbackFormId: $("#FeedbackFormId") === undefined ? "" : $("#FeedbackFormId").val(),
+language: 'en'
+})});</script><script type="text/javascript" src="/Modules/Polling/PollModule.js"></script><script type="text/javascript" src="https://js.esolutionsgroup.ca/js/libs/jquery_gallery/1.2.4/jquery.gallery.min.js"></script><script type="text/javascript">$(function () {
+    $(".eSolutionsGroupPhotoGalleryV2PlaceholderDiv").each(function () {
+        var method = $(this).attr("method");
+        var id = $(this).attr("id");
+        if (id != '') {
+            $(this).load(id, function () { return method; })
+        } else {
+            $(this).html('');
+        }
+    })
+});</script></head>
+<body>
+     
+<script type="text/javascript">
+    function HideEmergencyAlertBanners() {
+        if(! jQuery('#EmergencyBannerWrapperOuter').hasClass("hide")){
+            jQuery('#EmergencyBannerWrapperOuter').addClass("hide");
+		}
+        jQuery.cookie('seenAlertBanner', 1, { path: "/" });
+    }
+
+    jQuery(function () {
+        if (iCreateObject.corpHome.indexOf(document.location.hostname) >= 0) {
+            if ((document.location.href.toLowerCase().indexOf('/edit_') == -1) && (jQuery.cookie('seenAlertBanner') != 1) && iCreateObject.isSiteInICreateMode == false) {
+                jQuery.getJSON(iCreateObject.corpHome + '/Modules/News/services/getAlertBannerFeeds.ashx?feedId=95abcc5b-2e79-4c15-9386-e36865f55f5a&callback=?',
+	                function (result) {
+	                    var results = "";
+	                    jQuery.each(result, function (index, element) {
+	                        results += "<div class=\"alertbanner " + element.Categories[0].Code + "\"><div class=\"EmergencyBannerTitle\">" + element.Title + "</div><div class=\"EmergencyBannerText\">" + element.Description;
+	                        if (element.Attachments && element.Attachments.length > 0) {
+                                results += "<div class=\"EmergencyBannerAttachments\"><p class=\"AttachmentTitle\">Attachments</p><ul>"
+	                        }
+	                        jQuery.each(element.Attachments, function (index, attachment) {
+	                            results += "<li><a title=\"Click to view \"" + attachment.DisplayName + "\" href=\"https://icreate7.esolutionsgroup.ca/230002_iCreate_NewsV2/Management/Attachment/Download/"+attachment.Id+"\" target=\"_blank\">" + attachment.DisplayName + "</a></li>"
+	                        });
+	                        if (element.Attachments && element.Attachments.length > 0) {
+	                            results += "</ul></div>"
+	                        }
+	                        results+="</div></div>";
+	                    });
+	                    if (results != "") {
+	                        jQuery("#emergencyAlertBanners").append(results);
+	                        jQuery("#emergencyAlertBanners").children(".alertbanner:first").addClass("default");
+	                        jQuery("#EmergencyBannerWrapperOuter").removeClass("hide");
+	                        jQuery("#emergencyAlertBanners").rotating_EmergencyAlertBanners();
+	                    }
+	                }
+	            );
+            }
+        }
+    });
+		
+</script>
+
+<div id="EmergencyBannerWrapperOuter" class="hide">
+	<div id="EmergencyBanner" style="display: block;" class="nocontent">
+        <div id="emergencyAlertBanners" class="bannerContainer">	
+            <div id="EmergencyBannerClose"  role="contentinfo" aria-label="Hide Alert Banner">
+			    <a class="Close" href="#" onclick="javascript: HideEmergencyAlertBanners();">Close Alert Banner</a>
+		    </div> 	                          
+		</div>
+	</div>
+</div>
+
+	 
+<script type="text/javascript">
+    function HideBrowserAlertBanners() {
+        jQuery("#BrowserBannerWrapperOuter").addClass("hide");
+        jQuery.cookie("seenBrowserBanner", 1, {path: "/"});
+    }
+</script>
+
+
+<script type="text/javascript">
+if(/msie ((1[0])|[1-9]\.)/i.exec(navigator.userAgent))
+{
+    jQuery(function () {
+        if ((document.location.href.toLowerCase().indexOf("/edit_") == -1) && (jQuery.cookie("seenBrowserBanner") != 1)) {
+            jQuery("#BrowserBannerWrapperOuter").removeClass("hide");
+        }
+    });
+}
+</script>
+
+<div id="BrowserBannerWrapperOuter" class="hide">
+	<div id="BrowserBanner" class="nocontent">
+        <div id="browserAlertBanners" class="bannerContainer">	
+            <div id="BrowserBannerClose" role="contentinfo" aria-label="Hide Browser Compatibility Notification"> 
+			    <a href="#" onclick="javascript: HideBrowserAlertBanners();">Close Browser Compatibility Banner</a>
+		    </div> 			                    
+			<div class="alertbanner browserAlert" role="contentinfo" aria-label="Browser Compatibility Notification">
+				<div class="BrowserBannerTitle">Browser Compatibility Notification</div>
+				<div class="BrowserBannerText">It appears you are trying to access this site using an outdated browser.  As a result, parts of the site may not function properly for you.  We recommend updating your browser to its most recent version at your earliest convenience.</div>
+		 	</div>
+		</div>
+	</div>
+</div>
+    
+    
+        <input type="hidden" name="FeedbackFormId" id="FeedbackFormId" value="" />
+    
+        
+    <div id="uber" class='interior navTab01'>
+        <header id="header" class="nocontent">
+            		
+<a id="skipContent" class="sr-only sr-only-focusable nocontent" href="#main" title="Skip the main navigation">Skip navigation</a>            
+            <div id="headerInner" class="ic-container-fluid">
+                <div id="headerLeft">
+                    <div id="logo" title="View our Homepage">
+                        
+<a href="/en/index.aspx">
+    <img src="/en/images/structure/logo.svg" alt="Back to Homepage"/>
+</a>
+
+                        
+    
+                    </div>
+                    
+<script type="text/javascript">
+    var _element = $('#logo');
+    _title = _element.attr('title');
+
+    if(($('div#logo img').length) || ($('div#logo').has('div.eSolutionsGroupPhotoGalleryV2PlaceholderDiv').length)) {
+        if (iCreateObject.isSiteInICreateMode) {
+            _element.css('background','none');
+        }
+        else{
+            _element.addClass('hasImage');
+        }
+    }
+    else {
+        if (iCreateObject.isSiteInICreateMode && !iCreateObject.isSiteInPreviewMode) {
+            _element.removeClass('hasImage');
+            imgsrc = '/en/images/structure/logo.svg';
+            var title = _title;
+            var url = '/en/index.aspx';
+            var target = "_self";
+            _element.css("background", "url(" + imgsrc + ") no-repeat 0px 0px #FFFFFF").css("height","89px").css("background-size","contain").attr("title", jQuery.trim(title) != "" ? title : _title);
+            if (url != '' && !iCreateObject.isSiteInICreateMode || iCreateObject.isSiteInPreviewMode) {
+                _element.attr("onclick", "javascript:window.open('" + url + "','" + target + "');");
+            }
+        }        
+    }
+  </script>
+                </div>
+                
+<nav class="mobileNav" aria-label="Mobile Navigation">
+	<a class="mobileContact" href="tel:1-519-575-4400" title="Contact Us"></a>
+	<a href="#" class="menuTrigger" title="Menu"></a>
+</nav>
+                <div id="headerRight">
+                    <div id="topBar">
+						
+<div id="translateContainer">
+        <div id="google_translate_element"></div>
+    </div>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        if (!iCreateObject.isSiteInICreateMode)
+            new google.translate.TranslateElement({ pageLanguage: iCreateObject.lang, layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: iCreateObject.gaTrackingCode }, 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
+    $(window).load(function () {
+        // Google Translate Placeholder text
+        setTimeout(function () {
+            $('.goog-te-menu-value span').text("Translate");
+        }, 300);
+    });
+</script>
+						 
+
+<div class="searchContainer">
+    <div class="search" id="search-box">
+	    <input type="search" name="search" class="searchInput" placeholder="What are you looking for?" title="Enter search keywords"  />
+	    <button type="submit" value="Search" class="Btn searchButton" title="Search" >Search</button>
+    </div>
+</div>
+<div class="searchContainer hide" id="search-box-nav-container">
+    <div class="search " id="search-box-nav">
+	    <input type="search" name="search" class="searchInput" placeholder="What are you looking for?" title="Enter search keywords"  />
+	    <button type="submit" value="Search" class="Btn searchButton" title="Search" >Search</button>
+    </div>
+</div>
+
+						<button id="likeTo" data-modal-id="idLikeToModal">I Want To...</button>
+					</div>
+                     
+
+<nav id="mainNav" aria-label="Website Navigation">
+<ul id="nav"><li id="navTab01" class="current"><a title="View our Living Here page" href="/en/living-here/living-here.aspx" class="mainNavItem current"><h2>Living Here</h2></a><div class="dropDownContainer"><ul class="dropdown"><li><a title="view our A to Z Services" href="/Modules/AtoZ/Index.aspx" class="">A to Z Services</a></li><li><a title="View our Animal Services and Control page" href="/en/living-here/animal-services-and-control.aspx" class="">Animal Services and Control</a></li><li><a title="View our Child Care and Early Learning page" href="/en/living-here/child-care-and-early-learning.aspx" class="">Child Care and Early Learning</a></li><li><a title="View our Community Services page" href="/en/community-services.aspx" class="">Community Services</a></li><li><a title="View our Community Gardens page" href="/en/living-here/community-gardens.aspx" class="">Community Gardens</a></li><li><a title="View our Regional Council Members page" href="/en/regional-council-members.aspx?_mid_=21016" class="">Council Members</a></li><li><a title="View our COVID-19 INFORMATION CENTRE page" href="/en/living-here/covid-19-information-centre.aspx" class="">COVID-19 INFORMATION CENTRE</a></li><li><a title="View our Education and Schools page" href="/en/living-here/education-and-schools.aspx" class="">Education and Schools</a></li><li><a title="View our Emergency Services, Response and Planning page" href="/en/living-here/emergency-services-response-and-planning.aspx" class="">Emergency Services, Response and Planning</a></li></ul><ul class="dropdown"><li><a title="View our Employment Support page" href="/en/living-here/employment-support.aspx" class="">Employment Support</a></li><li><a title="View our Environmental Sustainability page" href="/en/living-here/environmental-sustainability.aspx" class="">Environmental Sustainability</a></li><li><a title="View our Calendar Page" href="https://calendar.regionofwaterloo.ca" class="">Events Calendar</a></li><li><a title="View our Financial Assistance page" href="/en/living-here/financial-assistance.aspx" class="">Financial Assistance</a></li><li><a title="View our Food Banks page" href="/en/living-here/food-banks.aspx" class="">Food Banks</a></li><li><a title="View our Waste Management page" href="/en/waste-management.aspx" class="">Garbage and Recycling</a></li><li><a title="View our Home Renovations page" href="/en/living-here/home-renovations.aspx" class="">Home Renovations</a></li><li><a title="View our Housing and Shelter page" href="/en/living-here/housing-and-shelter.aspx" class="">Housing and Shelter</a></li></ul><ul class="dropdown"><li><a title="View our New to Canada or Waterloo Region page" href="/en/living-here/new-to-canada-or-waterloo-region.aspx" class="">New to Canada or Waterloo Region</a></li><li><a title="News &amp; Notices" href="/Modules/News/Search.aspx" class="">News and Public Notices</a></li><li><a title="View our Older Adults page" href="/en/health-and-wellness/older-adult-health.aspx?_mid_=25138" class="">Older Adults</a></li><li><a title="View our Roads and Traffic page" href="/en/living-here/roads-and-traffic.aspx" class="">Roads and Traffic</a></li><li><a title="View our Safety and Crime Prevention page" href="/en/living-here/safety-and-crime-prevention.aspx" class="">Safety and Crime Prevention</a></li><li><a title="View our Taxes page" href="/en/living-here/taxes.aspx" class="">Taxes</a></li><li><a title="View our Transportation and Transit page" href="/en/exploring-the-region/transportation-and-transit.aspx" class="">Transportation and Transit</a></li><li><a title="View our Water and Wastewater page" href="/en/water-and-wastewater.aspx" class="">Water and Wastewater</a></li></ul></div></li><li id="navTab02"><a title="View our Exploring the Region page" href="/en/exploring-the-region/exploring-the-region-exploring-the-region.aspx?_mid_=25178" class="mainNavItem"><h2>Exploring the Region</h2></a><div class="dropDownContainer"><ul class="dropdown"><li><a title="View our About Waterloo Region page" href="/en/exploring-the-region/about-waterloo-region.aspx" class="">About Waterloo Region</a></li><li><a title="View our Airport page" href="/en/exploring-the-region/airport.aspx" class="">Airport</a></li><li><a title="View our Archives page" href="/en/regional-government/archives.aspx?_mid_=26963" class="">Archives</a></li><li><a title="View our Arts, Culture and Heritage page" href="/en/exploring-the-region/arts-culture-and-heritage.aspx" class="">Arts, Culture and Heritage</a></li></ul><ul class="dropdown"><li><a title="View our Events Calendar page" href="http://calendar.regionofwaterloo.ca" class="">Events Calendar</a></li><li><a title="View our Exploring the Region page" href="/en/exploring-the-region/exploring-the-region-exploring-the-region.aspx" class="">Exploring the Region</a></li><li><a title="View our Forests and Trails page" href="/en/exploring-the-region/forests-and-trails.aspx" class="">Forests and Trails</a></li><li><a title="View our Library page" href="/en/exploring-the-region/library.aspx" class="">Library</a></li></ul><ul class="dropdown"><li><a title="View our Maps page" href="/en/exploring-the-region/maps.aspx" class="">Maps</a></li><li><a title="View our Museums page" href="/en/exploring-the-region/museums.aspx" class="">Museums</a></li><li><a title="View our Transportation and Transit page" href="/en/exploring-the-region/transportation-and-transit.aspx" class="">Transportation and Transit</a></li></ul></div></li><li id="navTab03"><a title="View our Doing Business page" href="/en/doing-business/doing-business.aspx" class="mainNavItem"><h2>Doing Business</h2></a><div class="dropDownContainer"><ul class="dropdown"><li><a title="View our Applications, Licences and Permits page" href="/en/doing-business/applications-licences-and-permits.aspx" class="">Applications, Licences and Permits</a></li><li><a title="View our Bids and Tenders page" href="/en/doing-business/bids-and-tenders.aspx" class="">Bids and Tenders</a></li><li><a title="View our Commercial Waste page" href="/en/living-here/commercial-waste.aspx?_mid_=25213" class="">Commercial Waste</a></li><li><a title="View our Community Profile page" href="/en/doing-business/community-profile.aspx" class="">Community Profile</a></li><li><a title="View our Construction and Design Standards page" href="/en/doing-business/Construction-Design-Standards-and-Guidelines.aspx" class="">Construction and Design Standards</a></li><li><a title="View our Economic Development page" href="/en/economic-development.aspx" class="">Economic Development</a></li></ul><ul class="dropdown"><li><a title="View our Health Standards for Business page" href="/en/doing-business/health-standards-for-business.aspx" class="">Health Standards for Business</a></li><li><a title="View our Incentive Programs page" href="/en/doing-business/incentive-programs.aspx" class="">Incentive Programs</a></li><li><a title="View our Key Initiatives page" href="/en/doing-business/key-initiatives.aspx" class="">Key Initiatives</a></li><li><a title="View our Key Sectors page" href="/en/doing-business/key-sectors.aspx" class="">Key Sectors</a></li><li><a title="View our Operating a Child Care Business page" href="/en/living-here/operating-a-child-care-business.aspx?_mid_=25234" class="">Operating a Child Care Business</a></li><li><a title="View our Payment Options page" href="/en/doing-business/payment-options.aspx" class="">Payment Options</a></li></ul><ul class="dropdown"><li><a title="View our Planning and Development Services page" href="/en/doing-business/planning-and-development-services.aspx" class="">Planning and Development Services</a></li><li><a title="View our Regional Investments page" href="/en/doing-business/regional-investments.aspx" class="">Regional Investments</a></li><li><a title="View our Spills Prevention and Response page" href="/en/living-here/report-a-spill.aspx?_mid_=25243" class="">Spills Prevention and Response</a></li><li><a title="View our Surplus Auction page" href="/en/doing-business/surplus-auction.aspx" class="">Surplus Auction</a></li><li><a title="View our Workplace Wellness page" href="/en/doing-business/workplace-wellness.aspx" class="">Workplace Wellness</a></li></ul></div></li><li id="navTab04"><a title="View our Health and Wellness page" href="/en/health-and-wellness/health-and-wellness.aspx" class="mainNavItem"><h2>Health and Wellness</h2></a><div class="dropDownContainer"><ul class="dropdown"><li><a title="View our Alcohol and Drugs page" href="/en/health-and-wellness/alcohol-and-drugs.aspx" class="">Alcohol and Drugs</a></li><li><a title="View our Cannabis Vaping and Tobacco page" href="/en/health-and-wellness/cannabis-vaping-and-tobacco.aspx" class="">Cannabis Vaping and Tobacco</a></li><li><a title="View our Community Safety and Wellbeing Plan page" href="/en/health-and-wellness/community-safety-and-wellbeing-plan.aspx" class="">Community Safety and Wellbeing Plan</a></li><li><a title="View our Dementia Services page" href="/en/health-and-wellness/dementia-services.aspx" class="">Dementia Services</a></li><li><a title="View our Environmental Health page" href="/en/health-and-wellness/environmental-health.aspx" class="">Environmental Health</a></li><li><a title="View our Food and Drinking Water page" href="/en/health-and-wellness/food-and-drinking-water.aspx" class="">Food and Drinking Water</a></li><li><a title="View our Health Services and Resources page" href="/en/health-and-wellness/health-services-and-resources.aspx" class="">Health Services and Resources</a></li></ul><ul class="dropdown"><li><a title="View our Healthy Living page" href="/en/health-and-wellness/healthy-living.aspx" class="">Healthy Living</a></li><li><a title="View our Immunizations and Vaccines page" href="/en/health-and-wellness/immunizations-and-vaccines.aspx" class="">Immunizations and Vaccines</a></li><li><a title="View our Infection and Disease page" href="/en/health-and-wellness/infection-and-disease.aspx" class="">Infection and Disease</a></li><li><a title="View our Older Adult Health page" href="/en/health-and-wellness/older-adult-health.aspx" class="">Older Adult Health</a></li><li><a title="View our Parenting and Child Health page" href="/en/health-and-wellness/parenting-and-child-health.aspx" class="">Parenting and Child Health</a></li><li><a title="View our Pregnancy and Babys First Year page" href="/en/health-and-wellness/pregnancy-and-babys-first-year.aspx" class="">Pregnancy and Baby's First Year</a></li><li><a title="View our Public Health and Emergency Services page" href="/en/public-health-and-emergency-services.aspx" class="">Public Health and Emergency Services</a></li></ul><ul class="dropdown"><li><a title="View our Public Health Inspections page" href="/en/health-and-wellness/public-health-inspections.aspx" class="">Public Health Inspections</a></li><li><a title="View our Rehabilitation and Respite Care page" href="/en/health-and-wellness/rehabilitation-and-respite-care.aspx" class="">Rehabilitation and Respite Care</a></li><li><a title="View our School Health page" href="/en/health-and-wellness/school-health.aspx" class="">School Health</a></li><li><a title="View our Sexual Health page" href="/en/health-and-wellness/sexual-health.aspx" class="">Sexual Health</a></li><li><a title="View our Sunnyside Home Long-Term Care page" href="/en/health-and-wellness/sunnyside-home-long-term-care.aspx?_mid_=25354" class="">Sunnyside Home Long-Term Care</a></li><li><a title="View our Sunnyside Wellness Centre page" href="/en/health-and-wellness/sunnyside-wellness-centre.aspx" class="">Sunnyside Wellness Centre</a></li><li><a title="View our Youth Health page" href="/en/health-and-wellness/youth-health.aspx" class="">Youth Health</a></li></ul></div></li><li id="navTab05"><a title="View our Regional Government page" href="/en/regional-government/regional-government.aspx" class="mainNavItem"><h2>Regional Government</h2></a><div class="dropDownContainer"><ul class="dropdown"><li><a title="View our Agendas, Minutes and Webcasts page" href="/en/regional-government/agendas-minutes-and-webcasts.aspx?_mid_=27053" class="">Agendas, Minutes and Webcasts</a></li><li><a title="View our Awards page" href="/en/regional-government/awards.aspx" class="">Awards</a></li><li><a title="View our Budget and Finance Archives page" href="/en/regional-government/budget-and-finance-archives.aspx" class="">Budget and Financial Statements</a></li><li><a title="View our By-laws page" href="/en/regional-government/by-laws.aspx" class="">By-laws</a></li><li><a title="View our Careers and Volunteering page" href="/en/regional-government/careers-and-volunteering.aspx" class="">Careers and Volunteering</a></li><li><a title="Commissioner of Oaths" href="/en/doing-business/commissioner-of-oaths.aspx" class="">Commissioner of Oaths</a></li><li><a title="View our Contact Us page" href="/en/regional-government/contact-us.aspx" class="">Contact Us</a></li></ul><ul class="dropdown"><li><a title="View our Council page" href="/en/council.aspx" class="">Council</a></li><li><a title="View our Departments page" href="/en/regional-government/departments.aspx" class="">Departments</a></li><li><a title="View our Diversity, Equity and Inclusion page" href="/en/regional-government/diversity-equity-and-inclusion.aspx" class="">Diversity, Equity and Inclusion</a></li><li><a title="View our Elections page" href="/en/regional-government/elections.aspx" class="">Elections</a></li><li><a title="View our News and Public Notices page" href="/Modules/News/Search.aspx" class="">News and Public Notices</a></li><li><a title="View our Open Government page" href="/en/regional-government/open-government.aspx" class="">Open Government</a></li></ul><ul class="dropdown"><li><a title="View our Provincial Offences Court and Traffic Tickets page" href="/en/regional-government/provincial-offences-court-and-traffic-tickets.aspx" class="">Provincial Offences Court and Traffic Tickets</a></li><li><a title="View our Public Engagement page" href="/en/regional-government/public-engagement.aspx" class="">Public Engagement</a></li><li><a title="View our Regional Responsibilities - Who Does What in Government page" href="/en/regional-government/regional-responsibilities---who-does-what-in-government.aspx" class="">Regional Responsibilities - Who Does What in Government</a></li><li><a title="View our Reports, plans and data page" href="/en/regional-government/reports-plans-and-data.aspx" class="">Reports, Plans and Data</a></li><li><a title="View our Corporate Strategic Plan page" href="/en/regional-government/corporate-strategic-plan.aspx?_mid_=28240" class="">Strategic Plan</a></li><li><a title="View our &quot;I Want to&quot; page" href="/en/regional-government/i-want-to.aspx?_mid_=25430" class="">I want to...</a></li></ul></div></li></ul>
+</nav>
+           
+                </div>
+                <!-- header right -->
+            </div>
+            <!--headerInner -->
+        </header>
+
+        
+<nav id="socialNav" class="nocontent" aria-label="Social Links">
+    <p>
+  <a title="" href="https://www.facebook.com/RegionWaterloo/" target="_blank">
+    <img alt="View our Facebook Page" src="/en/resourcesGeneral/socialicons/icon-facebook.svg" />
+  </a>
+  <a title="" href="https://twitter.com/RegionWaterloo" target="_blank">
+    <img alt="View our Twitter Page" src="/en/resourcesGeneral/socialicons/icon-twitter.svg" />
+  </a>
+  <a title="" href="https://www.youtube.com/user/regionofwaterloo" target="_blank">
+    <img alt="View our YouTube Page" src="/en/resourcesGeneral/socialicons/icon-youtube.svg" />
+  </a>
+</p>
+</nav>
+
+
+
+        <div style="display: none;" class="icreateTokenWrapper">
+            
+    
+        </div>
+
+        <div id="main">
+            <div class="ic-container-fluid">
+                <button id="subNavBtn">Show <span>More</span></button>
+                <div id="subNavWrapper" class="nocontent">
+                    <nav id="subNavContainer" aria-label="Related Pages">
+                        <ul class="subNav"><li class="open top"><a title="View our COVID-19 INFORMATION CENTRE page" href="/en/living-here/covid-19-information-centre.aspx" class="current"><span>COVID-19 INFORMATION CENTRE</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our 2019 Novel Coronavirus (COVID-19) page" href="/en/health-and-wellness/2019-novel-coronavirus.aspx?_mid_=31099" class=""><span>Region of Waterloo Public Health COVID-19 section</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Adults and COVID-19 page" href="/en/health-and-wellness/adults-and-covid-19.aspx?_mid_=31167" class=""><span>Adults and COVID-19</span></a></li><li class=""><a title="View our Children/Teens and COVID-19 page" href="/en/health-and-wellness/children-teens-and-covid-19.aspx?_mid_=31168" class=""><span>Children/Teens and COVID-19</span></a></li><li class=""><a title="View our Community Assessment Centres page" href="/en/health-and-wellness/community-assessment-centres.aspx?_mid_=31113" class=""><span>Community Assessment Centres</span></a></li><li class=""><a title="View our Coronavirus FAQs page" href="/en/health-and-wellness/coronavirus-faqs.aspx?_mid_=31114" class=""><span>Coronavirus FAQs</span></a></li><li class=""><a title="View our Coronavirus Media Briefing Notes page" href="/en/health-and-wellness/coronavirus-media-briefing-notes.aspx?_mid_=31115" class=""><span>Coronavirus Media Briefing Notes</span></a></li><li class=""><a title="View our Coronavirus resources for health professionals page" href="/en/health-and-wellness/coronavirus-resources-for-health-professionals.aspx?_mid_=31116" class=""><span>Coronavirus resources for health professionals</span></a></li><li class=""><a title="View our Coronavirus resources for schools and child care centres page" href="/en/health-and-wellness/coronavirus-resources-for-schools-and-child-care-centres.aspx?_mid_=31117" class=""><span>Coronavirus resources for schools and child care centres</span></a></li><li class=""><a title="View our Coronavirus resources for workplaces page" href="/en/health-and-wellness/coronavirus-resources-for-workplaces.aspx?_mid_=31118" class=""><span>Coronavirus resources for workplaces</span></a></li><li class=""><a title="View our Regional closures and service changes page" href="/en/living-here/covid-19-list-of-closures-and-service-changes.aspx?_mid_=31120" class=""><span>Regional closures and service changes</span></a></li></ul></li><li class=""><a title="View our COVID-19 Community Supports page" href="/en/living-here/covid-19-community-supports-for-the-vulnerable.aspx?_mid_=31096" class=""><span>COVID-19 Community Supports</span></a></li><li class=""><a title="View our COVID-19 Coordinated Response - Newsletter page" href="/en/living-here/covid-19-coordinated-response-newsletter.aspx?_mid_=31097" class=""><span>COVID-19 Coordinated Response - Newsletter</span></a></li><li class=""><a title="View our COVID-19 How to help page" href="/en/living-here/covid-19-how-to-help.aspx" class=""><span>COVID-19 How to help</span></a></li><li class=""><a title="View our COVID-19 Who to contact page" href="/en/living-here/covid-19-who-to-contact.aspx" class=""><span>COVID-19 Who to contact</span></a></li><li class=""><a title="View our Here For You page" href="/en/living-here/here-for-you.aspx" class=""><span>Here For You</span></a></li><li class=""><a title="View our COVID-19 List of closures and service changes page" href="/en/living-here/covid-19-list-of-closures-and-service-changes.aspx?_mid_=31095" class=""><span>Regional closures and service changes</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Current closures in effect page" href="/en/living-here/current-closures-in-effect.aspx" class=""><span>Current closures in effect</span></a></li></ul></li><li class=""><a title="View our Waterloo Region COVID-19 summary page" href="/en/health-and-wellness/positive-cases-in-waterloo-region.aspx?_mid_=31127" class=""><span>Waterloo Region COVID-19 summary</span></a></li></ul></li></ul><ul class="subNav"><li class=""><a title="view our A to Z Services" class="" href="/Modules/AtoZ/Index.aspx"><span>A to Z Services</span></a></li><li class=""><a title="View our Animal Services and Control page" class="" href="/en/living-here/animal-services-and-control.aspx"><span>Animal Services and Control</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Animal Bites page" class="" href="/en/living-here/animal-bites.aspx"><span>Animal Bites</span></a></li><li class=""><a title="View our Pests page" class="" href="/en/living-here/pests.aspx"><span>Pests</span></a></li></ul></li><li class=""><a title="View our Child Care and Early Learning page" class="" href="/en/living-here/child-care-and-early-learning.aspx"><span>Child Care and Early Learning</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Help Paying for Child Care page" class="" href="/en/living-here/help-paying-for-child-care.aspx"><span>Help Paying for Child Care</span></a></li><li class=""><a title="View our Find Quality Child Care and Early Learning page" class="" href="/en/living-here/find-quality-child-care-and-early-learning.aspx"><span>Find Quality Child Care and Early Learning</span></a></li><li class=""><a title="View our Operating a Child Care Business page" class="" href="/en/living-here/operating-a-child-care-business.aspx"><span>Operating a Child Care Business</span></a></li><li class=""><a title="View our Region of Waterloo Home Child Care page" class="" href="/en/living-here/region-of-waterloo-home-child-care.aspx"><span>Region of Waterloo Home Child Care</span></a></li><li class=""><a title="View our Region of Waterloo Children's Centres page" class="" href="/en/living-here/region-owned-child-care-centres.aspx"><span>Region of Waterloo Children's Centres</span></a></li><li class=""><a title="View our Special Needs Supports page" class="" href="/en/living-here/special-needs-supports.aspx"><span>Special Needs Supports</span></a></li><li class=""><a title="View our Planning and Research page" class="" href="/en/living-here/planning-and-research.aspx"><span>Planning and Research</span></a></li><li class=""><a title="View our Quality Improvement page" class="" href="/en/living-here/quality-improvement.aspx"><span>Quality Improvement</span></a></li><li class=""><a title="View our EarlyON Child and Family Centres page" class="" href="/en/living-here/earlyon-child-and-family-centres.aspx"><span>EarlyON Child and Family Centres</span></a></li></ul></li><li class=""><a title="View our Community Services page" class="" href="/en/community-services.aspx"><span>Community Services</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Child Care and Early Learning page" class="" href="/en/living-here/child-care-and-early-learning.aspx?_mid_=25065"><span>Child Care and Early Learning</span></a></li><li class=""><a title="View our Employment Support page" class="" href="/en/living-here/employment-support.aspx?_mid_=25066"><span>Employment Support</span></a></li><li class=""><a title="View our Financial Assistance page" class="" href="/en/living-here/financial-assistance.aspx?_mid_=25067"><span>Financial Assistance</span></a></li><li class=""><a title="View our Housing and Shelter page" class="" href="/en/living-here/housing-and-shelter.aspx?_mid_=25068"><span>Housing</span></a></li><li class=""><a title="View our Older Adults page" class="" href="/en/living-here/living-here-older-adults.aspx?_mid_=25069"><span>Older Adults</span></a></li></ul></li><li class=""><a title="View our Community Gardens page" class="" href="/en/living-here/community-gardens.aspx"><span>Community Gardens</span></a></li><li class=""><a title="View our Regional Council Members page" class="" href="/en/regional-council-members.aspx?_mid_=21016"><span>Council Members</span></a></li><li class=""><a title="View our Education and Schools page" class="" href="/en/living-here/education-and-schools.aspx"><span>Education and Schools</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Teaching Resources page" class="" href="/en/living-here/teaching-resources.aspx"><span>Teaching Resources</span></a></li></ul></li><li class=""><a title="View our Emergency Services, Response and Planning page" class="" href="/en/living-here/emergency-services-response-and-planning.aspx"><span>Emergency Services, Response and Planning</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Ambulance, Fire, Police page" class="" href="/en/living-here/ambulance-fire-police.aspx"><span>Ambulance, Fire, Police</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Paramedic Services page" class="" href="/en/living-here/paramedic-services.aspx"><span>Paramedic Services</span></a></li><li class=""><a title="View our Public Access Defibrillator page" class="" href="/en/living-here/public-access-defibrillator.aspx"><span>Public Access Defibrillator</span></a></li><li class=""><a title="View our Right Call, Right Care page" class="" href="/en/living-here/right-call-right-care.aspx"><span>Right Call, Right Care</span></a></li></ul></li><li class=""><a title="View our Emergency Response Plans page" class="" href="/en/living-here/emergency-response-plan.aspx"><span>Emergency Response Plans</span></a></li><li class=""><a title="View our Emergency Services Training Centre page" class="" href="/en/living-here/emergency-services-training-centre.aspx"><span>Emergency Services Training Centre</span></a></li><li class=""><a title="View our Fire Safety page" class="" href="/en/living-here/fire-safety.aspx"><span>Fire Safety</span></a></li><li class=""><a title="View our Hospitals page" class="" href="/en/living-here/hospitals.aspx"><span>Hospitals</span></a></li><li class=""><a title="View our Preparing for an Emergency page" class="" href="/en/living-here/preparing-for-an-emergency.aspx"><span>Preparing for an Emergency</span></a></li></ul></li><li class=""><a title="View our Employment Support page" class="" href="/en/living-here/employment-support.aspx"><span>Employment Support</span></a></li><li class=""><a title="View our Environmental Sustainability page" class="" href="/en/living-here/environmental-sustainability.aspx"><span>Environmental Sustainability</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Air Quality page" class="" href="/en/health-and-wellness/air-quality.aspx?_mid_=25086"><span>Air Quality</span></a></li><li class=""><a title="View our Climate Change and Extreme Weather page" class="" href="/en/living-here/climate-change-and-extreme-weather.aspx"><span>Climate Change and Extreme Weather</span></a></li><li class=""><a title="View our Conserving Water page" class="" href="/en/living-here/conserving-water.aspx?_mid_=25088"><span>Conserving Water</span></a></li><li class=""><a title="View our Energy Management page" class="" href="/en/living-here/energy-management.aspx"><span>Energy Management</span></a></li><li class=""><a title="View our Growth Management page" class="" href="/en/doing-business/growth-management.aspx?_mid_=25090"><span>Growth Management</span></a></li><li class=""><a title="View our Natural Environment page" class="" href="/en/living-here/natural-environment.aspx"><span>Natural Environment</span></a></li><li class=""><a title="View our Salt Management page" class="" href="/en/living-here/salt-management.aspx?_mid_=25480"><span>Salt Management</span></a></li><li class=""><a title="View our Teaching Resources page" class="" href="/en/living-here/environmental-sustainability-teaching-resources.aspx"><span>Teaching Resources</span></a></li></ul></li><li class=""><a title="View our Calendar Page" class="" href="https://calendar.regionofwaterloo.ca"><span>Events Calendar</span></a></li><li class=""><a title="View our Financial Assistance page" class="" href="/en/living-here/financial-assistance.aspx"><span>Financial Assistance</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Ontario Works page" class="" href="/en/living-here/ontario-works.aspx"><span>Ontario Works</span></a></li><li class=""><a title="View our Help Paying for Child Care page" class="" href="/en/living-here/help-paying-for-child-care.aspx?_mid_=25097"><span>Help Paying for Child Care</span></a></li><li class=""><a title="View our Dental Health page" class="" href="/en/health-and-wellness/dental-health.aspx?_mid_=25098"><span>Dental Health</span></a></li><li class=""><a title="View our Discounted Bus Pass page" class="" href="https://www.grt.ca/en/fares-passes/reduced-income.aspx"><span>Discounted Bus Pass</span></a></li><li class=""><a title="View our Help Paying Rent page" class="" href="/en/living-here/help-paying-rent.aspx"><span>Help Paying Rent</span></a></li><li class=""><a title="View our Utility Bill Help page" class="" href="/en/living-here/utility-bill-help.aspx"><span>Utility Bill Help</span></a></li><li class=""><a title="View our Funding for Home Repairs page" class="" href="/en/living-here/funding-for-home-repairs.aspx?_mid_=26966"><span>Funding for Home Repairs</span></a></li><li class=""><a title="View our Funding to Help Buy a Home page" class="" href="/en/living-here/funding-to-help-buy-a-home.aspx?_mid_=26968"><span>Funding to Help Buy a Home</span></a></li><li class=""><a title="View our Canada Learning Bond page" class="" href="/en/living-here/canada-learning-bond.aspx"><span>Canada Learning Bond</span></a></li><li class=""><a title="View our Affordable Food page" class="" href="/en/living-here/affordable-food.aspx"><span>Affordable Food</span></a></li></ul></li><li class=""><a title="View our Food Banks page" class="" href="/en/living-here/food-banks.aspx"><span>Food Banks</span></a></li><li class=""><a title="View our Waste Management page" class="" href="/en/waste-management.aspx"><span>Garbage and Recycling</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Blue Box page" class="" href="/en/living-here/blue-box-recycling.aspx"><span>Blue Box  </span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Cart recycling for multi-unit buildings and schools page" class="" href="/en/living-here/cart-recycling-for-multi-unit-buildings-and-schools.aspx?_mid_=26167"><span>Cart recycling for multi-unit buildings and schools</span></a></li></ul></li><li class=""><a title="View our Bulky Items and Appliances page" class="" href="/en/living-here/bulky-items-and-appliances.aspx"><span>Bulky Items and Appliances</span></a></li><li class=""><a title="View our Collection Issues page" class="" href="/en/living-here/collection-schedules-and-issues.aspx"><span>Collection Issues</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Bans and By-laws page" class="" href="/en/living-here/bans-and-bylaws.aspx"><span>Bans and By-laws</span></a></li><li class=""><a title="View our Collection by Building Type page" class="" href="/en/living-here/collection-by-building-type.aspx"><span>Collection by Building Type</span></a></li><li class=""><a title="View our Collection Schedules page" class="" href="/en/living-here/collection-schedules.aspx"><span>Collection Schedules</span></a></li><li class=""><a title="View our My Waste App page" class="" href="/en/living-here/my-waste-app.aspx"><span>Waste App</span></a></li></ul></li><li class=""><a title="View our Commercial Waste page" class="" href="/en/living-here/commercial-waste.aspx"><span>Commercial Waste</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Workplace Waste Reduction and Recycling Directory page" class="" href="/en/living-here/workplace-waste-reduction-and-recycling-directory.aspx"><span>Workplace Waste Reduction and Recycling Directory</span></a></li></ul></li><li class=""><a title="View our page about residential drop-off programs and waste reduction tips" class="" href="/en/living-here/residential-reduce-and-reuse-options.aspx"><span>Drop-off, landfill hours, reduce and reuse options for residents</span></a></li><li class=""><a title="View our Education and Events page" class="" href="/en/living-here/environmental-education-and-resources.aspx"><span>Education and Events</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Publications and resources page" class="" href="/en/living-here/publications-and-resources.aspx?_mid_=26161"><span>Publications and resources</span></a></li></ul></li><li class=""><a title="View our Garbage page" class="" href="/en/living-here/garbage.aspx"><span>Garbage</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Garbage Tags page" class="" href="/en/living-here/garbage-tags.aspx?_mid_=26165"><span>Garbage Tags</span></a></li><li class=""><a title="View our Medical Exemptions page" class="" href="/en/living-here/medical-exemptions.aspx"><span>Medical Exemptions</span></a></li></ul></li><li class=""><a title="View our Green Bin page" class="" href="/en/living-here/green-bin.aspx"><span>Green Bin</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Backyard Composting page" class="" href="/en/living-here/backyard-composting.aspx"><span>Backyard Composting</span></a></li><li class=""><a title="View our Cart recycling for multi-unit buildings and schools page" class="" href="/en/living-here/cart-recycling-for-multi-unit-buildings-and-schools.aspx?_mid_=26168"><span>Cart recycling for multi-unit buildings and schools</span></a></li></ul></li><li class=""><a title="View our Household Hazardous Waste page" class="" href="/en/living-here/household-hazardous-waste.aspx"><span>Household Hazardous Waste</span></a></li><li class=""><a title="View our Landfill and Recycling Centre page" class="" href="/en/living-here/landfill-and-recycling-centre.aspx"><span>Landfill and Recycling Centre</span></a></li><li class=""><a title="View our Landlords and Property Managers page" class="" href="/en/living-here/landlords-and-property-managers.aspx"><span>Landlords and Property Managers</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Cart recycling for multi-unit buildings and schools page" class="" href="/en/living-here/cart-recycling-for-multi-unit-buildings-and-schools.aspx"><span>Cart recycling for multi-unit buildings and schools</span></a></li><li class=""><a title="Post Secondary Students" class="" href="/en/living-here/post-secondary-students.aspx"><span>Post Secondary Students</span></a></li></ul></li><li class=""><a title="View our Yard Waste page" class="" href="/en/living-here/yard-waste.aspx"><span>Yard Waste</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Backyard Composting page" class="" href="/en/living-here/backyard-composting.aspx?_mid_=26173"><span>Backyard Composting</span></a></li></ul></li></ul></li><li class=""><a title="View our Home Renovations page" class="" href="/en/living-here/home-renovations.aspx"><span>Home Renovations</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Call Before You Dig page" class="" href="/en/living-here/call-before-you-dig.aspx"><span>Call Before You Dig</span></a></li><li class=""><a title="View our Funding for Home Repairs page" class="" href="/en/living-here/funding-for-home-repairs.aspx?_mid_=25126"><span>Funding for Home Repairs</span></a></li><li class=""><a title="View our Permits page" class="" href="/en/living-here/permits.aspx"><span>Permits</span></a></li></ul></li><li class=""><a title="View our Housing and Shelter page" class="" href="/en/living-here/housing-and-shelter.aspx"><span>Housing and Shelter</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Emergency Shelters and Transitional Housing page" class="" href="/en/living-here/emergency-shelters-and-transitional-housing.aspx"><span>Emergency Shelters and Transitional Housing</span></a></li><li class=""><a title="View our Find Affordable Housing page" class="" href="/en/living-here/find-affordable-housing.aspx"><span>Find Affordable Housing</span></a></li><li class=""><a title="View our Funding for Home Repairs page" class="" href="/en/living-here/funding-for-home-repairs.aspx"><span>Funding for Home Repairs</span></a></li><li class=""><a title="View our Funding for Secondary Suites page" class="" href="/en/living-here/funding-for-secondary--in-law--suites.aspx"><span>Funding for Secondary Suites</span></a></li><li class=""><a title="View our Funding to Help Buy a Home page" class="" href="/en/living-here/funding-to-help-buy-a-home.aspx"><span>Funding to Help Buy a Home</span></a></li><li class=""><a title="View our Help to Find and Keep a Home page" class="" href="/en/living-here/help-to-find-and-keep-a-home.aspx"><span>Help to Find and Keep a Home</span></a></li><li class=""><a title="View our Housing Providers page" class="" href="/en/living-here/housing-providers.aspx"><span>Housing Providers</span></a></li><li class=""><a title="View our Incentives to Create Affordable Housing page" class="" href="/en/living-here/incentives-to-create-affordable-housing.aspx"><span>Incentives to Create Affordable Housing</span></a></li><li class=""><a title="View our Living in community housing page" class="" href="/en/living-here/living-in-community-housing.aspx"><span>Living in Community Housing</span></a></li><li class=""><a title="View our Community housing updates page" class="" href="/en/living-here/community-housing-updates.aspx"><span>Community housing updates</span></a></li><li class=""><a title="View our Waterloo Region Housing Master Plan page" class="" href="/en/living-here/waterloo-region-housing-master-plan.aspx"><span>Waterloo Region Housing Master Plan</span></a></li><li class=""><a title="View our Sunnyside Supportive Housing page" class="" href="/en/health-and-wellness/sunnyside-supportive-housing.aspx?_mid_=25575"><span>Sunnyside Supportive Housing</span></a></li><li class=""><a title="View our The Renter's Toolkit page" class="" href="/en/living-here/the-renter_s-toolkit.aspx"><span>The Renter's Toolkit</span></a></li><li class=""><a title="View our Housing Planning and Research page" class="" href="/en/living-here/housing-planning-and-research.aspx"><span>Housing Planning and Research</span></a></li></ul></li><li class=""><a title="View our New to Canada or Waterloo Region page" class="" href="/en/living-here/new-to-canada-or-waterloo-region.aspx"><span>New to Canada or Waterloo Region</span></a></li><li class=""><a title="News &amp; Notices" class="" href="/Modules/News/Search.aspx"><span>News and Public Notices</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="News" class="" href="/Modules/News/search.aspx?feedId=ab159244-c732-45c7-b4c9-67b38b43eed5"><span>News</span></a></li></ul></li><li class=""><a title="View our Older Adults page" class="" href="/en/health-and-wellness/older-adult-health.aspx?_mid_=25138"><span>Older Adults</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Dementia Services page" class="" href="/en/health-and-wellness/dementia-services.aspx?_mid_=27143"><span>Dementia Services</span></a></li><li class=""><a title="View our Sunnyside Wellness Centre page" class="" href="/en/health-and-wellness/sunnyside-wellness-centre.aspx?_mid_=27203"><span>Sunnyside Wellness Centre</span></a></li><li class=""><a title="View our Sunnyside Home Long-Term Care page" class="" href="/en/health-and-wellness/sunnyside-home-long-term-care.aspx"><span>Sunnyside Home Long-Term Care</span></a></li><li class=""><a title="View our Sunnyside Supportive Housing page" class="" href="/en/health-and-wellness/sunnyside-supportive-housing.aspx?_mid_=27205"><span>Sunnyside Supportive Housing</span></a></li><li class=""><a title="View our Rehabilitation and Respite Care page" class="" href="/en/health-and-wellness/rehabilitation-and-respite-care.aspx?_mid_=27206"><span>Rehabilitation and Respite Care</span></a></li><li class=""><a title="View our Homemaking Support page" class="" href="/en/living-here/homemaking-support.aspx"><span>Homemaking Support</span></a></li></ul></li><li class=""><a title="View our Roads and Traffic page" class="" href="/en/living-here/roads-and-traffic.aspx"><span>Roads and Traffic</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Carpooling page" class="" href="/en/living-here/carpooling.aspx"><span>Carpooling</span></a></li><li class=""><a title="View our Annual Collision Report page" class="" href="/en/living-here/collision-reporting.aspx"><span>Annual Collision Report</span></a></li><li class=""><a title="View our Construction and Road Closures page" class="" href="/en/living-here/construction-and-road-closures.aspx?_mid_=25142"><span>Construction and Road Closures</span></a></li><li class=""><a title="View our Cycling and Walking page" class="" href="/en/living-here/cycling-and-walking.aspx"><span>Cycling and Walking</span></a></li><li class=""><a title="View our Distracted Driving page" class="" href="/en/living-here/distracted-driving.aspx"><span>Distracted Driving</span></a></li><li class=""><a title="View our Parking page" class="" href="/en/living-here/parking.aspx"><span>Parking</span></a></li><li class=""><a title="View our Red Light Cameras page" class="" href="/en/living-here/red-light-cameras.aspx"><span>Red Light Cameras</span></a></li><li class=""><a title="View our Roundabouts page" class="" href="/en/living-here/roundabouts.aspx"><span>Roundabouts</span></a></li><li class=""><a title="View our Separated Cycling Lanes page" class="" href="/en/exploring-the-region/separated-cycling-lanes.aspx"><span>Separated Cycling Lanes</span></a></li><li class=""><a title="View our Signs and Signals page" class="" href="/en/living-here/signs-and-signals.aspx?_mid_=25149"><span>Signs and Signals</span></a></li><li class=""><a title="View our Traffic Safety page" class="" href="/en/living-here/traffic-safety.aspx"><span>Traffic Safety</span></a></li></ul></li><li class=""><a title="View our Safety and Crime Prevention page" class="" href="/en/living-here/safety-and-crime-prevention.aspx"><span>Safety and Crime Prevention</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Bullying page" class="" href="/en/living-here/bullying.aspx"><span>Bullying</span></a></li><li class=""><a title="View our Crime Prevention Council page" class="" href="/en/living-here/crime-prevention-council.aspx"><span>Crime Prevention Council</span></a></li><li class=""><a title="View our Domestic Violence page" class="" href="/en/living-here/domestic-violence.aspx"><span>Domestic Violence</span></a></li></ul></li><li class=""><a title="View our Taxes page" class="" href="/en/living-here/taxes.aspx"><span>Taxes</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Municipal Property Assessment Corporation (MPAC) and Appeals page" class="" href="/en/living-here/municipal-property-assessment-corporation-mpac-and-appeals.aspx"><span>Municipal Property Assessment Corporation (MPAC) and Appeals</span></a></li><li class=""><a title="View our Policies, Reliefs and Rebates page" class="" href="/en/living-here/policies-reliefs-and-rebates.aspx"><span>Policies, Reliefs and Rebates</span></a></li><li class=""><a title="View our Rates page" class="" href="/en/living-here/rates.aspx"><span>Rates</span></a></li></ul></li><li class=""><a title="View our Transportation and Transit page" class="" href="/en/exploring-the-region/transportation-and-transit.aspx"><span>Transportation and Transit</span></a></li><li class=""><a title="View our Water and Wastewater page" class="" href="/en/water-and-wastewater.aspx"><span>Water and Wastewater</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our About Wastewater page" class="" href="/en/living-here/about-wastewater.aspx"><span>About Wastewater</span></a></li><li class=""><a title="View our About Water page" class="" href="/en/living-here/about-water.aspx"><span>About Water</span></a></li><li class=""><a title="View our Beaches and Pools page" class="" href="/en/health-and-wellness/beaches-and-pools.aspx?_mid_=25164"><span>Beaches and Pools</span></a></li><li class=""><a title="View our Billing, Rates and Meters page" class="" href="/en/living-here/billing-rates-and-meters.aspx"><span>Billing, Rates and Meters</span></a></li><li class=""><a title="View our Biosolids page" class="" href="/en/living-here/biosolids.aspx"><span>Biosolids</span></a></li><li class=""><a title="View our Commercial Programs and Funding page" class="" href="/en/living-here/commercial-programs-and-funding.aspx"><span>Commercial Programs and Funding</span></a></li><li class=""><a title="View our Conserving Water page" class="" href="/en/living-here/conserving-water.aspx"><span>Conserving Water</span></a></li><li class=""><a title="View our Current Projects page" class="" href="/en/living-here/current-projects.aspx"><span>Current Projects</span></a></li><li class=""><a title="View our Drinking Water Locations page" class="" href="/en/living-here/drinking-water-locations.aspx"><span>Drinking Water Locations</span></a></li><li class=""><a title="View our Drinking Water page" class="" href="/en/health-and-wellness/drinking-water.aspx?_mid_=25170"><span>Drinking Water Safety</span></a></li><li class=""><a title="View our Protecting Water page" class="" href="/en/living-here/protecting-water.aspx"><span>Protecting Water</span></a></li><li class=""><a title="View our Water and Wastewater page" class="" href="/en/regional-government/water-and-wastewater.aspx?_mid_=25482"><span>Reports, plans and data</span></a></li><li class=""><a title="View our Report a Spill page" class="" href="/en/living-here/report-a-spill.aspx"><span>Report a Spill</span></a></li><li class=""><a title="View our Salt Management page" class="" href="/en/living-here/salt-management.aspx"><span>Salt Management</span></a><div class="toggle" aria-label="Click to see more links in this section">Toggle Section</div><ul><li class=""><a title="View our Snow and Ice Clearing Tips for Homeowners page" class="" href="/en/living-here/snow-and-ice-clearing-tips-for-homeowners.aspx"><span>Snow and Ice Clearing Tips for Homeowners</span></a></li><li class=""><a title="View our Winter Maintenance for Commercial Properties page" class="" href="/en/living-here/winter-maintenance-for-commercial-properties.aspx"><span>Winter Maintenance for Commercial Properties</span></a></li></ul></li><li class=""><a title="View our Small Drinking Water Systems page" class="" href="/en/doing-business/small-drinking-water-systems.aspx?_mid_=25175"><span>Small Drinking Water Systems</span></a></li><li class=""><a title="View our Teaching Resources page" class="" href="/en/living-here/water-and-wastewater-teaching-resources.aspx"><span>Teaching Resources</span></a></li><li class=""><a title="View our Water Softeners page" class="" href="/en/living-here/water-softeners.aspx"><span>Water Softeners</span></a></li></ul></li></ul>
+                    </nav>
+                </div>          
+                
+                <div id="contentInt">
+                    <div id="printArea">  
+                        <div id="pageHeading">
+                            <h1>
+    
+        COVID-19 INFORMATION CENTRE
+    </h1>
+                            
+<div id="actions" class="nocontent" role="toolbar">
+    <input type="hidden" id="hdnContent" name="hdnContent" />
+	<input type="hidden" id="hdnPage" name="hdnPage" />
+    <div class="actionItem">
+        <a id="printLink" class="printLink" title="Print This Page X" href="javascript: PrintScreen();"></a>
+    </div>
+    
+<div id="Share" class="share">
+	<a class="ShareLink" href="javascript: void(0);" title="Share This Page">
+	</a>
+    
+	<ul id="ShareItemsPlaceholder" class="shareDropDown">
+        <li>
+            <a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fwww.regionofwaterloo.ca%2fen%2fliving-here%2fcovid-19-information-centre.aspx" title="" target="_blank">
+                <img src="/Common/images/share/facebook.gif" alt="Open new window to share this page via Facebook" />
+                <span>Facebook</span>
+            </a>
+        </li>
+        <li>
+            <a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3a%2f%2fwww.regionofwaterloo.ca%2fen%2fliving-here%2fcovid-19-information-centre.aspx" title="" target="_blank">
+                <img src="/Common/images/share/linkedin.gif" alt="Open new window to share this page via LinkedIn" />
+                <span>LinkedIn</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="http://twitter.com/home?status=Check+out+http%3a%2f%2fwww.regionofwaterloo.ca%2fen%2fliving-here%2fcovid-19-information-centre.aspx" title="" target="_blank">
+                <img src="/Common/images/share/twitter.gif" alt="Open new window to share this page via Twitter" />
+                <span>Twitter</span>
+            </a>
+        </li>
+
+        <li>
+            <a id="emailLink" href="#" onclick="javascript: mailTo(event);" title="">
+                <img src="/Common/images/share/email.png" alt="Email This page" />
+                <span>Email</span>
+            </a>
+        </li>
+	</ul>
+    
+    <script type="text/javascript">
+        if (!iCreateObject.isSiteInICreateMode) {
+            $("#ShareItemsPlaceholder li").last().addClass("last");
+        }
+        else
+        {
+            $("#ShareItemsPlaceholder").empty();
+        }
+
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            $("#Share a.ShareLink").click(function (event) {
+                if (iCreateObject.isSiteInICreateMode) {
+                    showNAMessage();
+                }
+                else {
+                    event.preventDefault();
+                    $("#Share").trigger("mouseenter");
+                }
+            });
+        }
+
+        if (iCreateObject.lang == 'fr') {
+            $("#Share a.ShareLink").attr("title", "Partager cette page");
+
+            $("#ShareItemsPlaceholder li a").each(function () {
+                $(this).attr("title", $(this).attr("title").replace("Open new window to share this page via", "Ouvrir une nouvelle fen�tre pour partager cette page avec"));
+            });
+        }
+        
+    </script>
+</div>
+	
+    <div class="resizeText">
+        
+            <a class="textIncrease" href="#" title="Increase text size"></a>
+            
+            <a class="textDecrease" href="#" title="Decrease text size"></a>
+        
+    </div>
+
+    
+</div>
+
+
+                        </div>
+                        
+<div id="breadcrumbs" class="nocontent">
+<a title="Home page" href="/en/index.aspx">Home</a><span>/</span><a title="View our Living Here page" href="/en/living-here/living-here.aspx">Living Here</a><span>/</span><span>COVID-19 INFORMATION CENTRE</span>
+</div>
+
+                        
+                        <div id="intBanner">
+                            <div id="intBannerImage" class="nocontent">
+                                
+    
+        <p><img src="/en/living-here/resources/COVID-information-page4.gif" alt="COVID information page banner"></p>
+    
+                                
+                            </div>          
+                            <script type="text/javascript">
+      var _element = $('#intBannerImage');
+      _title = _element.attr('title');
+
+      if(($('div#intBannerImage img').length) || ($('div#intBannerImage').has('div.eSolutionsGroupPhotoGalleryV2PlaceholderDiv').length)) {
+      if (iCreateObject.isSiteInICreateMode ) {
+      _element.css('background','none');
+      _element.addClass('hasImage');
+      }
+      else{
+      _element.addClass('hasImage');
+      }
+
+      } else {
+      if (iCreateObject.isSiteInICreateMode && !iCreateObject.isSiteInPreviewMode) {
+      _element.removeClass('hasImage');
+      var interiorBanners = [
+        repSingleQuote("/en/rotatingimages/navTab01/defaultInteriorBanner.jpg")];
+      var titles = [
+        repSingleQuote("Living Here")];
+      var urls = [
+        ""];
+      var newWindows = [false];
+      if (interiorBanners.length != 0) {
+      var num = Math.floor(Math.random() * ( (interiorBanners.length - 1) + 1));
+      imgsrc = interiorBanners[num];
+      var title = titles[num];
+      var url = urls[num];
+      var target = newWindows[num]?"_blank":"_self";
+      _element.css("background", "url(" + imgsrc + ") no-repeat 0px 0px #FFFFFF").attr("title", jQuery.trim(title) != "" ? title : _title);
+      if(url != '' && !iCreateObject.isSiteInICreateMode || iCreateObject.isSiteInPreviewMode){
+      _element.attr("onclick","javascript:window.open('"+url+"','"+target+"');");
+      }
+      } else {
+      var defaultBanners = [
+        repSingleQuote("/en/rotatingimages/defaultInterior/defaultInteriorBanner.jpg"),
+        repSingleQuote("/en/rotatingimages/defaultInterior/wellbeing-survey2.jpg")];
+      var defaultTitles = [
+        repSingleQuote("Default Interior Banner"),
+        repSingleQuote("Wellbeing Waterloo Region survey")];
+      var defaultUrls = [
+        ""];
+      var defaultNewWindows = [false];
+      if (defaultBanners.length != 0) {
+      var num = Math.floor(Math.random() * ( (defaultBanners.length - 1) + 1));
+      imgsrc = defaultBanners[num];
+      var title = defaultTitles[num];
+      _element.css("background", "url(" + imgsrc + ") no-repeat 0px 0px #FFFFFF").attr("title", jQuery.trim(title) != "" ? title : _title);
+      if(url != '' && !iCreateObject.isSiteInICreateMode || iCreateObject.isSiteInPreviewMode){
+      _element.attr("onclick","javascript:window.open('"+url+"','"+target+"');");
+      }
+      }
+      }
+      }
+      }
+    </script>
+                        </div>
+                       
+                        <div id="printAreaContent" tabindex="-1">
+							
+    
+        <p>We’re here for you. The Region of Waterloo will continue to provide residents with the municipal programs and services you depend on. Find out more by visiting our <a href="/en/living-here/here-for-you.aspx">Here For You webpage</a>.</p>
+<p>For information on non-health topics related to COVID-19, please visit the following pages:</p>
+<ul>
+<li><a href="/en/living-here/covid-19-list-of-closures-and-service-changes.aspx" target="_blank">Regional closures and service changes due to covid-19</a></li>
+<li><a href="/en/living-here/covid-19-community-supports-for-the-vulnerable.aspx" target="_blank">Community supports during covid-19</a></li>
+<li><a href="/en/living-here/covid-19-coordinated-response-newsletter.aspx" target="_blank">COVID-19 coordinated response newsletter</a></li>
+<li><a href="/Modules/News/Search.aspx" target="_blank">Newsroom</a>&nbsp;(<a href="https://subscribe.regionofwaterloo.ca/Subscribe" target="_blank">Subscribe</a>&nbsp;to Region of Waterloo media releases)</li>
+<li><a href="https://www.ontario.ca/page/list-essential-workplaces" target="_blank">Information for businesses</a>&nbsp;(Ontario)</li>
+</ul>
+<p>For health information on COVID-19, visit:</p>
+<ul>
+<li><a title="View our 2019 Novel Coronavirus (COVID-19) page" href="/en/health-and-wellness/2019-novel-coronavirus.aspx">Region of Waterloo Public Health COVID-19 section</a></li>
+<li><a href="https://www.canada.ca/en/public-health.html" target="_blank">Public Health Agency of Canada</a></li>
+<li><a href="https://www.publichealthontario.ca/en/diseases-and-conditions/infectious-diseases/respiratory-diseases/novel-coronavirus/public-resources" target="_blank">Public Health Ontario</a></li>
+</ul>
+<p>For information on how you can contribute, visit:</p>
+<ul>
+<li><a title="View our COVID-19 How to help page" href="/en/living-here/covid-19-how-to-help.aspx">How to help.</a></li>
+</ul>
+    
+						</div>
+
+                         
+<a href="#" id="pageSubscription" class="button nocontent" style="display:none;">Subscribe to this Page</a>
+
+    <link rel='stylesheet' href='/Modules/PageSubscription/style/PageSubscriptionForm.css' />
+    <script src="/Modules/PageSubscription/scripts/PageSubscription.js"></script>
+
+                        <div id="contactMainContainer">
+                            <div class="contactContainer">
+                                <div class="contactHeader">
+                                    <div class="contactHeaderTitle">
+                                        <p>Contact Us</p>
+                                    </div>
+                                </div>
+                                <!--contactHeader -->
+                                <div class="contactBody">
+                                    
+    
+                                </div>
+                                <div class="contactFooter"></div>
+                            </div>
+                        </div>
+                         
+<script type="text/javascript" src="/Common/scripts/toggleContent.js"></script>
+ 
+                        
+                    </div>
+                </div>
+                <!--mainContent-->
+            </div>
+        </div>
+        <!--main-->
+        
+        <footer class="section fp-auto-height nocontent" data-anchor="5">
+            
+<div class="ic-container-fluid">
+    <p><img src="/en/resourcesGeneral/logos/logo-light.svg" alt="ROW logo"></p>
+         
+<nav id="regionNav" aria-label="Regional Municipalities">
+    <a title="View our City of Cambridge Page" href="https://www.cambridge.ca" target="_blank"><h2>City of Cambridge</h2></a><a title="View our City of Kitchener Page" href="https://www.kitchener.ca" target="_blank"><h2>City of Kitchener</h2></a><a title="View our City of Waterloo Page" href="http://www.waterloo.ca/" target="_blank"><h2>City of Waterloo</h2></a><a title="View our Township of North Dumfries Page" href="http://www.northdumfries.ca/en/" target="_blank"><h2>Township of North Dumfries</h2></a><a title="View our Township of Wellesley Page" href="https://www.wellesley.ca" target="_blank"><h2>Township of Wellesley</h2></a><a title="View our Township of Wilmot Page" href="http://www.wilmot.ca" target="_blank"><h2>Township of Wilmot</h2></a><a title="View our Township of Woolwich Page" href="http://www.woolwich.ca" target="_blank"><h2>Township of Woolwich</h2></a>
+</nav>
+    <p>© 2020 Region of Waterloo, 150 Frederick St., Kitchener, Ontario N2G 4J3, Telephone: <a title="Dial 519-575-4400" href="tel:%20519-575-4400">519-575-4400</a>,&nbsp; Deaf and Hard of Hearing (TTY):&nbsp;<a title="Dial 519-575-4608" href="tel:%20519-575-4608">519-575-4608</a>, Fax: 519-575-4481, <a title="Email the Region" href="mailto:regionalinquiries@regionofwaterloo.ca">Email Us</a></p>
+         
+<nav id="footerNav" aria-label="Footer Links">
+    <a title="View our Website Accessibility page" href="/en/regional-government/website-accessibility.aspx">Accessibility</a><a title="View our Contact Us page" href="/en/regional-government/contact-us.aspx">Contact Us</a><a title="" href="#" id="feedbackLink">Website Feedback</a><a title="View our Privacy Statement page" href="/en/regional-government/website-privacy-statement.aspx">Privacy Statement</a><a title="View our Privacy Statement page" href="/en/regional-government/website-privacy-statement.aspx?_mid_=28841">Terms of Use</a><a title="View our Sitemap Page" href="/Common/sitemap.aspx">Sitemap</a><a title="View our Careers and Volunteering page" href="/en/regional-government/careers-and-volunteering.aspx">Careers and Volunteering</a>
+</nav>
+
+    <a id="esol" target="_blank" href="http://www.esolutionsgroup.ca">Designed by eSolutionsGroup</a>
+</div>
+<!-- Footer top -->
+
+
+<script type="text/javascript">
+	
+	var href = document.location.href;
+	var lastPathSegment = href.substr(href.lastIndexOf('/') + 1);
+	
+	if (lastPathSegment.toLowerCase().substring(0,8) == "compare_") {
+		$('.AccordionTrigger').addClass('open');
+        $('.AccordionContent').attr('style', "display:block !important");
+	}
+
+</script>
+
+<script type="text/javascript" src='/Common/scripts/script.js?v=10'></script>
+
+    <script type="text/javascript" src='https://js.esolutionsgroup.ca/js/libs/icreate-tinymce-accordion/1.0.7/jquery-icrtaccordion-clean.min.js'></script>
+<script type="text/javascript">
+    iCreateObject.gaTrackingCode = '';
+
+    var _gaq = _gaq || []; var pluginUrl = "//www.google-analytics.com/plugins/ga/inpage_linkid.js"; _gaq.push(["_require", "inpage_linkid", pluginUrl]); _gaq.push(["_setAccount", iCreateObject.gaTrackingCode]); _gaq.push(["_trackPageview"]); (function () { var e = document.createElement("script"); e.type = "text/javascript"; e.async = true; e.src = ("https:" == document.location.protocol ? "https://" : "http://") + "stats.g.doubleclick.net/dc.js"; var t = document.getElementsByTagName("script")[0]; t.parentNode.insertBefore(e, t) })(); if (typeof jQuery != "undefined") { jQuery(document).ready(function (e) { var t = /\.(zip|exe|pdf|doc*|xls*|ppt*|mp3)$/i; var n = ""; if (jQuery("base").attr("href") != undefined) n = jQuery("base").attr("href"); jQuery("a").each(function () { var e = jQuery(this).attr("href"); var r = jQuery(this).attr("href"); if (e) { e = e.toLowerCase() } if (e && e.match(/^https?\:/i) && !e.match(document.domain)) { jQuery(this).click(function () { var t = e.replace(/^https?\:\/\//i, ""); _gaq.push(["_trackEvent", "External", "Click", t]); if (jQuery(this).attr("target") != undefined && jQuery(this).attr("target").toLowerCase() != "_blank") { setTimeout(function () { location.href = r }, 200); return false } }) } else if (e && e.match(/^mailto\:/i)) { jQuery(this).click(function () { var t = e.replace(/^mailto\:/i, ""); _gaq.push(["_trackEvent", "Email", "Click", t]) }) } else if (e && e.match(t)) { jQuery(this).click(function () { var t = /[.]/.exec(e) ? /[^.]+$/.exec(e) : undefined; var r = e; _gaq.push(["_trackEvent", "Download", "Click-" + t, r]); if (jQuery(this).attr("target") != undefined && jQuery(this).attr("target").toLowerCase() != "_blank") { setTimeout(function () { location.href = n + e }, 200); return false } }) } }) }) }
+</script>
+
+<script type="text/javascript">
+
+(function() {
+var sz = document.createElement('script'); sz.type = 'text/javascript'; sz.async = true;
+sz.src = '//siteimproveanalytics.com/js/siteanalyze_562946.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sz, s);
+})();
+
+</script>
+        </footer>
+       
+    </div>
+    <!--uber-->
+     
+<div id="idLikeToModal" class="modal-box" role="contentinfo" aria-label="I Want To Link List" >
+    <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h2 class="modal-title">I Want To...</h2>
+	</div>
+    <div class="modal-body">
+        <div class="idLikeToCol"><h4>Report or Request</h4><ul><li><a title="View our By-Law Enforcement page" href="/en/regional-government/by-law-enforcement.aspx">By-law concern</a></li><li><a title="view our construction and road closures page" href="/en/living-here/construction-and-road-closures.aspx">Concern with construction and road closure</a></li><li><a title="view our signs and signals page" href="/en/living-here/signs-and-signals.aspx">Concern with signs and signals</a></li><li><a title="view our harm reduction page" href="/en/living-here/harm-reduction.aspx">Found a needle</a></li><li><a title="View our Immunization page" href="/en/health-and-wellness/immunization-reporting.aspx">Immunization records</a></li><li><a title="View our Complaints and Feedback page" href="/en/regional-government/complaints-and-feedback.aspx">Make a complaint</a></li><li><a title="View our Contact Us page" href="https://www.grt.ca/en/about-grt/contact-us.aspx">Make a complaint, compliment or feedback about transit</a></li><li><a title="Report a waste collection issue" href="https://myforms.regionofwaterloo.ca/form/auto/hrc_wastecomplain">Report a waste collection issue</a></li><li><a title="View our I want to... page" href="/en/regional-government/i-want-to.aspx">More...</a></li><li><a title="View our Report or Request Page" href="#" class="viewMore">
+
+      View All..
+
+    </a></li></ul></div><div class="idLikeToCol"><h4>Apply or Register</h4><ul><li><a title="View our find affordable housing page" href="/en/living-here/find-affordable-housing.aspx">Affordable Housing</a></li><li><a title="View our special needs supports page" href="/en/living-here/special-needs-supports.aspx">Help for a child with special needs in child care</a></li><li><a title="View our Help Paying for Child Care page" href="/en/living-here/help-paying-for-child-care.aspx">Help to pay for child care</a></li><li><a title="View our Region of Waterloo home child care page" href="/en/living-here/region-of-waterloo-home-child-care.aspx">Home Child Care</a></li><li><a title="View our Ontario Works page" href="/en/living-here/ontario-works.aspx">Ontario Works</a></li><li><a title="View our applications, licences and permits page" href="/en/doing-business/applications-licences-and-permits.aspx">Permit or license</a></li><li><a title="View our Volunteering page" href="/en/regional-government/volunteer.aspx">Volunteer</a></li><li><a title="View our I want to... page" href="/en/regional-government/i-want-to.aspx">More...</a></li></ul></div><div class="idLikeToCol"><h4>Pay</h4><ul><li><a title="View our Garbage Tags page" href="/en/living-here/garbage-tags.aspx">For garbage tags</a></li><li><a title="View our Billing, Rates and Meters page" href="/en/living-here/billing-rates-and-meters.aspx">My water bill</a></li><li><a title="View our Payment Options page" href="/en/doing-business/payment-options.aspx">My invoice</a></li><li><a title="View our provincial offences court and traffic ticket page" href="/en/regional-government/provincial-offences-court-and-traffic-tickets.aspx?_mid_=18703">My Provincial offence or traffic ticket</a></li><li><a title="View our I want to... page" href="/en/regional-government/i-want-to.aspx">More...</a></li></ul></div><div class="idLikeToCol"><h4>Talk to Us</h4><ul><li><a title="View our Communicate with Council page" href="/en/regional-government/communicate-with-council.aspx">Communicate with Council</a></li><li><a title="View our Contact Us page" href="/en/regional-government/contact-us.aspx">Contact Us</a></li><li><a title="Find information about community services" href="http://isearchmycommunity.ca" target="_blank">Find information about community services</a></li><li><a title="view our public engagement page" href="/en/regional-government/public-engagement.aspx">Provide input on Regional issues</a></li><li><a title="Open new window to rate our services" href="https://s-ca.chkmkt.com/?e=133590&amp;h=BEBD07232AAF5C1&amp;l=en">Rate our services</a></li><li><a title="View our Subscribe page" href="https://www.regionofwaterloo.ca/subscribe" target="_blank">Subscribe to news and alerts</a></li><li><a title="View our I want to... page" href="/en/regional-government/i-want-to.aspx">More...</a></li></ul></div>
+    </div>
+</div>
+<div class="modal-cover"></div>
+
+    
+    
+    
+    
+
+<div role="complementary" aria-label="Dialogs">
+    <div role="dialog" id="searchPopup" class="modal-box" aria-label="Search Modal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h2 class="modal-title">Search Results</h2>
+        </div>
+        <div class="modal-body">
+            <div class="modal-search-container">
+                <h2>Search Results:</h2>
+                <div class="searchBar" role="search">
+                    <div class="search" id="search-modal-search">
+                        <input type="search" name="search" class="searchInput" placeholder="What are you looking for?" title="Enter search keywords"  />
+                        <button type="submit" value="Search" class="Btn searchButton" title="Search" >Search</button>
+                    </div>
+                </div>
+                <div class="searchResults" role="region" aria-label="Search Results"></div>
+                <div class="searchPagination" role="region" aria-label="Search Pagination"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-cover"></div>
+</div>
+
+<script type="text/javascript">
+$(window).load(function () {
+    if ($('body.loaded').length) {
+       $('.ui-helper-hidden-accessible').attr('aria-atomic', 'true');
+   }
+});
+</script>
+    
+<script type="text/javascript">
+    var facets;
+    function changePage() {
+        var targetPage = $(this).attr("data-page");
+        var criteria = $(this).attr("data-criteria");
+        var field = $(this).attr("data-field");
+        var value = $(this).attr("data-value");
+        performSearch(criteria,targetPage,field,value);
+    }
+    function applyFacet() {
+        var criteria = $(this).attr("data-criteria");
+        var field = $(this).attr("data-field");
+        var value = $(this).attr("data-value");
+        performSearch(criteria,1,field, value);
+    }
+    function performSearch(criteria, page, field, value,ignoreSuggestions) {
+        if (criteria != "") {
+            $(".modal-search-container .searchResults").empty().append("<p>Searching...</p>");
+            $(".searchPagination").empty();
+            $("input.searchInput").val(criteria);
+            $.ajax('/Modules/search/services/FunnelbackSearch.ashx?q=' + criteria + (page != undefined && typeof page != 'object' && page != "" ? "&p=" + page : "") + (field != undefined && typeof field != 'object' && field != "" ? "&f=" + field : "") + (value != undefined && typeof value != 'object' && value != "" ? "&v=" + value : "") + (ignoreSuggestions != undefined && !ignoreSuggestions?"&qsups=false":""), {
+                success: function (data, status, jqXHR) {
+                    $(".modal-search-container .searchResults").empty();
+                    if (data.spellingSuggestion != undefined && data.spellingSuggestion != "") {
+                        var suggestion = $("<p>Did you mean '<a href=\"#\" onclick=\"performSearch('" + data.spellingSuggestion + "',1,'','');\">" + data.spellingSuggestion + "</a>'?</p>");
+                        $(".modal-search-container .searchResults").prepend(suggestion);
+                    }
+
+                    if (data.results.length == 0) {
+                        $(".modal-search-container .searchResults").append("<h3>No Results Found</h3>");
+                    } else {
+                        if (data.spellingExpansion != undefined && data.spellingExpansion != "") {
+                            var expansion = $("<p>Your search has been expanded to: <strong>" + data.spellingExpansion + "</strong>. Search for '<a href=\"#\" onclick=\"performSearch('" + data.query + "',1,'','',false);\">" + data.query + "</a>' instead.</p>");
+                            $(".modal-search-container .searchResults").prepend(expansion);
+                        } else {
+                            $(".modal-search-container .searchResults").prepend("<p>Your search for '<strong>" + criteria + "</strong>' returned <strong>" + data.total + "</strong> results.</p>");
+                        }              
+
+                        $(data.results).each(function (index, result) {
+                            $(".modal-search-container .searchResults").append("<h3><a href=\"" + result.liveUrl + "\">" + result.title + "</a></h3>"+(result.fileType == "pdf"?"<div><img src=\"/Modules/search/images/pdf-doc_icon.png\" alt=\"PDF Icon\"/>&nbsp;Adobe Pdf</div>":result.fileType == "doc" ||result.fileType == "docx" ?"<div><img src=\"/Modules/search/images/word-doc_icon.png\" alt=\"Word Icon\"/>&nbsp;Microsoft Word</div>":"")+"<p>" + result.summary + "</p>");
+                        });
+
+                        $("#searchPopup").animate({ scrollTop: 0 });
+
+                        var searchPagination = $("<ul>");
+                        $(searchPagination).append($("<li data-page=\"1\" data-criteria=\""+criteria+"\" "+(field!=""?" data-field=\""+field+"\"":"")+(value!=""?" data-value=\""+value+"\"":"")+"><a href=\"#\">&laquo;</a></li>").on("click", changePage));
+                        $(searchPagination).append($("<li data-page=\""+(data.currentPage-1<=1?1:data.currentPage-1)+"\" data-criteria=\""+criteria+"\" "+(field!=""?" data-field=\""+field+"\"":"")+(value!=""?" data-value=\""+value+"\"":"")+"><a href=\"#\">&lsaquo;</a></li>").on("click", changePage));
+                    
+                        var startPage = (data.currentPage - 5 <= 1 ? 1 : data.currentPage - 5)
+                        for (var i = startPage; i <= data.pages && i < startPage + 10; i++) {
+                            $(searchPagination).append($("<li data-page=\"" + i + "\" data-criteria=\"" + criteria + "\" " + (field != "" ? " data-field=\"" + field + "\"" : "") + (value != "" ? " data-value=\"" + value + "\"" : "") + "><a href=\"#\">" + (i == data.currentPage?"<strong>":"") + i + (i == data.currentPage?"</strong>":"") + "</a></li>").on("click", changePage));
+                        }
+                        $(searchPagination).append($("<li data-page=\""+(data.currentPage+1>=data.pages?data.pages:data.currentPage+1)+"\" data-criteria=\""+criteria+"\" "+(field!=""?" data-field=\""+field+"\"":"")+(value!=""?" data-value=\""+value+"\"":"")+"><a href=\"#\">&rsaquo;</a></li>").on("click", changePage));
+                        $(searchPagination).append($("<li data-page=\"" + data.pages + "\" data-criteria=\""+criteria+"\" "+(field!=""?" data-field=\""+field+"\"":"")+(value!=""?" data-value=\""+value+"\"":"")+"><a href=\"#\">&raquo;</a></li>").on("click", changePage));
+                        $(".searchPagination").empty().append(searchPagination);
+
+                        if ((field == undefined || field == "") && (value == undefined || value == "")) {
+                            facets = data.facetGroups;
+                        }
+
+                        if (facets != undefined && facets.length > 0) {
+                            var facetSection = $("<div class=\"searchResultsSide\"></div>");
+                            $(facets).each(function (index, element) {
+                                $(facetSection).append("<h4>" + element.label + "</h4>");
+                                var ul = $("<ul></ul>");
+                                $(element.facets).each(function (i, f) {
+                                    $(ul).append($("<li data-field=\"" + f.field + "\" data-criteria=\"" + criteria + "\" data-value=\"" + (f.data==value?"":f.data) + "\"><a href=\"\#\">" + (f.field==field && f.data==value?"<strong>":"") + f.label + (f.field==field && f.data==value?"</strong>":"")+ "</a></li>").on("click", applyFacet));
+                                });
+                                
+                                $(facetSection).append(ul);
+                            });
+                            $(".modal-search-container .searchResults").prepend(facetSection);
+                        }
+                    }
+                    
+
+                    modalOpen("searchPopup");
+                },
+                error: function () {
+                    $(".modal-search-container .searchResults").empty().append("<h3>We're sorry, we are unable to perform your search at this time.</h3>");
+                    $(".searchPagination").empty();
+                    modalOpen("searchPopup");
+                }
+            });
+        }
+    }
+    $(document).ready(function () {
+        $("button.searchButton").on("click", function () {
+            var criteria = $(this).siblings("input.searchInput").val();
+            performSearch(criteria,1);
+        });
+        $("input.searchInput").on("keydown", function (event) {
+            if (event.keyCode == 13) {
+                var criteria = $(this).val();
+                performSearch(criteria,1);
+            }
+        });
+
+        $(".modal-header button").on("click", function () {
+            modalClose("searchPopup");
+        })
+
+        $("#search-box input.searchInput").autocomplete({
+            source: iCreateObject.corpRoot + "Modules/search/services/FunnelbackAutoSuggest.ashx",
+            select: function (event, ui) {
+                performSearch(ui.item.label,1);
+            },
+            appendTo: "#search-box"
+        });
+
+
+        $("#search-modal-search input.searchInput").autocomplete({
+            source: iCreateObject.corpRoot + "Modules/search/services/FunnelbackAutoSuggest.ashx",
+            select: function (event, ui) {
+                performSearch(ui.item.label,1);
+            },
+            appendTo: "#search-modal-search"
+        });
+
+        $("#search-box-nav-container input.searchInput").autocomplete({
+            source: iCreateObject.corpRoot + "Modules/search/services/FunnelbackAutoSuggest.ashx",
+            select: function (event, ui) {
+                performSearch(ui.item.label,1);
+            },
+            appendTo: "#search-box-nav-container"
+        });
+        
+    });
+    
+</script>
+
+
+</body>
+</html>
+
+                                
+                            
