@@ -1,0 +1,68 @@
+Folder PATH listing
+Volume serial number is A249-C8A1
+C:.
+³   README.md
+³   requirements.txt
+³   tree.txt
+³   webcrawler.py
+³   
+ÀÄÄÄdataset
+    ÃÄÄÄcovid
+    ³       B.C.'s Response to COVID-19 - Province of British Columbia.html
+    ³       BC COVID-19 Data - BC Centre for Disease Control.html
+    ³       Canada's COVID-19 Economic Response Plan - Canada.ca.html
+    ³       Coronavirus (COVID-19) events as they happen.html
+    ³       Coronavirus disease (COVID-19) outbreak updates ....html
+    ³       Coronavirus Update (Live) 11,031,515 Cases and 525,091 ....html
+    ³       COVID 19 Mandatory Mask or Face Covering Bylaw ƒ?" City of ....html
+    ³       COVID-19  Government of Prince Edward Island.html
+    ³       COVID-19 - BC Centre for Disease Control.html
+    ³       COVID-19 INFORMATION CENTRE - Region of Waterloo.html
+    ³       COVID-19 Self-Assessment - My Health Alberta.html
+    ³       COVID-19 Statistics in Niagara - Niagara Region, Ontario.html
+    ³       COVID-19 Testing Clinics  Grand River Hospital.html
+    ³       Home  COVID-19 Information  University of Waterloo.html
+    ³       How Ontario is responding to COVID-19  Ontario.ca.html
+    ³       novel coronavirus (COVID-19)  Alberta Health Services.html
+    ³       Ontario reports 165 new COVID-19 cases  CP24.com.html
+    ³       Ontario reports 165 new COVID-19 cases as active cases ....html
+    ³       Ontario reports fourth straight day with fewer than 200 new ....html
+    ³       
+    ÃÄÄÄtigers
+    ³       10 tiger facts!  National Geographic Kids.html
+    ³       Bengal Tiger  National Geographic.html
+    ³       Cubs Meet Adult Tiger for the First Time  Tigers About The ....html
+    ³       Detroit Tigers (@tigers)  Twitter.html
+    ³       Detroit Tigers open summer camp with top prospects and ....html
+    ³       Endangered tigers face growing threats from an Asian road ....html
+    ³       Official Detroit Tigers Website  MLB.com.html
+    ³       Tiger  Defenders of Wildlife.html
+    ³       tiger  Facts, Information, & Habitat  Britannica.html
+    ³       Tiger  San Diego Zoo Kids.html
+    ³       Tiger  Species  WWF.html
+    ³       Tiger - National Geographic Kids.html
+    ³       Tiger - Wikipedia.html
+    ³       Tigers - U.S. Fish and Wildlife Service.html
+    ³       Tigers Endangered Species Facts, Info & More  WWF.CA.html
+    ³       Tigers The Largest Cats in the World  Live Science.html
+    ³       
+    ÀÄÄÄuniversity
+            Carleton University - Canada's Capital University - Ottawa.html
+            Home  University of Waterloo  University of Waterloo.html
+            Home  uOttawa  University of Ottawa.html
+            Home - University of Victoria.html
+            Ontario Tech University.html
+            Ontario Universities' Application Centre Home.html
+            Queen's University Home - Kingston.html
+            Universities - Canada.html
+            Universities Canada - The voice of Canadian universities.html
+            University - Wikipedia.html
+            University Affairs Canadian university news, opinion, careers.html
+            University of Guelph - Improve Life.html
+            University of Regina.html
+            University of Toronto.html
+            University of Windsor.html
+            UniversityStudy.ca Universities Canada Study Information.html
+            Western University - London.html
+            York University Home.html
+            
