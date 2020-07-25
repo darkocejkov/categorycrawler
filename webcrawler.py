@@ -123,7 +123,7 @@ for x in range(count_q): #BEGIN query loop
         searchSoup = BeautifulSoup(response.content, 'html.parser')
         text = searchSoup.find_all(text=True)
         # h = html2text.HTML2Text()
-        # h.ignore_links = True
+        # h.ignore_links = True #these are settings for html2text object
         # h.ignore_images = True
         # h.ignore_tables = True
 
