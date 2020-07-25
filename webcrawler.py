@@ -3,6 +3,8 @@ import requests
 from os import path, mkdir
 from shutil import rmtree
 from bs4 import BeautifulSoup
+import html2text
+import io
 
 #define user agent for query to force desktop viewing for optimal scraping
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0"
@@ -29,14 +31,13 @@ for x in range(count_q): #BEGIN query loop
     query.replace(' ', "+") #replace spaces with + so that it works in the Google query search
     URL  = f"https://google.com/search?q={query}" 
 
-    
     resp = requests.get(URL, headers=headers) #use requests library to request the Google search results webpage
 
     if resp.status_code == 200: #code 200 means successful request
         soup = BeautifulSoup(resp.content, "html.parser") 
 
     results = []
-    for g in soup.find_all('div', class_='r'):
+    for g in soup.find_all('div', class_='r'): #parse through all the google search results looking for titles and links
         anchors = g.find_all('a')
         if anchors:
             link = anchors[0]['href']
@@ -47,36 +48,52 @@ for x in range(count_q): #BEGIN query loop
             }
             results.append(item)
 
-    next = soup.find(id='pnnext')
+    next = soup.find(id='pnnext') #use the parser to find the link to the next google search page
     next_link = next['href']
     
-    next_page = "https://www.google.com"+next_link
+    next_page = "https://www.google.com"+next_link #concat. the search link with a google page link
+
+    whitelist = [ #an array of allowed text sources within an HTML page to get important text
+        'p'
+    ]
     
-    for x in results:
+    for x in results: #go thru the array of search results and scrape those pages
         print(f"{x}")
-        url = x.get('link')
-        response = requests.get(url, headers=headers)
-        if resp.status_code != 200:
+        url = x.get('link') #use the dictionary to grab the link
+        response = requests.get(url, headers=headers) #request the page in said search result
+        if response.status_code != 200:
             continue
 
-        filen = f"./dataset/{query}/{x.get('title')}.html"
+        fileH = f"./dataset/{query}/{x.get('title')}.html" #format a string to become the .html file name
+        fileT = f"./dataset/{query}/{x.get('title')}.txt"
         for ch in ILL_CHARS:
-            if ch in filen:
-                filen = filen.replace(ch, '')
-        #print(filen)
-        #urllib.request.urlretrieve(url, filename)
-        
-        with open(filen, 'wb') as f:
-            f.write(response.content)
+            if ch in fileH:
+                fileH = fileH.replace(ch, '') #replace characters that produce windows errors in filenames
+            if ch in fileT:
+                fileT = fileT.replace(ch, '')
 
-    resp = requests.get(next_page, headers=headers)
+        output = ''
+        searchSoup = BeautifulSoup(response.content, 'html.parser') #open a new soup object to parse text within HTML
+        text = searchSoup.find_all(text=True) #find all elements that contain text (non-HTML)
+
+        for t in text: #iterate through all elements and put them into output string if their element parent is a paragraph <p>
+            if t.parent.name in whitelist:
+                output += '{} '.format(t)
+        
+        with open(fileH, 'wb') as f:
+            f.write(response.content) #write to the file
+
+        with io.open(fileT, 'w', encoding="utf-8") as ff: #write to .txt file with utf-8 to support any characters
+            #ff.write(h.handle(response.text))
+            ff.write(output)
+
+    resp = requests.get(next_page, headers=headers) #this requests the next page of search results
 
     if resp.status_code == 200:
         soup = BeautifulSoup(resp.content, "html.parser")
 
-    #print(soup)
     results = []
-    for g in soup.find_all('div', class_='r'):
+    for g in soup.find_all('div', class_='r'): #again, parse through the google page to obtain the actual results
         anchors = g.find_all('a')
         if anchors:
             link = anchors[0]['href']
@@ -87,24 +104,40 @@ for x in range(count_q): #BEGIN query loop
             }
             results.append(item)
 
-    for x in results:
+    for x in results: #repeat for the next page (yes, i know this could've been done with a loop or function im lazy)
         print(f"{x}")
         url = x.get('link')
         response = requests.get(url, headers=headers)
-        if resp.status_code != 200:
+        if response.status_code != 200:
             continue
 
-        filen = f"./dataset/{query}/{x.get('title')}.html"
+        fileH = f"./dataset/{query}/{x.get('title')}.html"
+        fileT = f"./dataset/{query}/{x.get('title')}.txt"
         for ch in ILL_CHARS:
-            if ch in filen:
-                filen = filen.replace(ch, '')
-        #print(filen)
-        #urllib.request.urlretrieve(url, filename)
+            if ch in fileH:
+                fileH = fileH.replace(ch, '')
+            if ch in fileT:
+                fileT = fileT.replace(ch, '')
         
-        with open(filen, 'wb') as f:
+        output = ''
+        searchSoup = BeautifulSoup(response.content, 'html.parser')
+        text = searchSoup.find_all(text=True)
+        # h = html2text.HTML2Text()
+        # h.ignore_links = True
+        # h.ignore_images = True
+        # h.ignore_tables = True
+
+        #print(h.handle(response.text))
+        for t in text:
+            if t.parent.name in whitelist:
+                output += '{} '.format(t)
+
+        with open(fileH, 'wb+') as f:
             f.write(response.content)
-        # anchor = scrapeAnchor(x.get('link'), headers)
-        # filename = f"./dataset/{query}/{x.get('title')}.html"
-        # with open(filename, 'wb') as f:
-        #     f.write(anchor)
-    
+
+        with io.open(fileT, 'w', encoding="utf-8") as ff:
+            #ff.write(h.handle(response.text))
+            ff.write(output)
+            
+
+       
